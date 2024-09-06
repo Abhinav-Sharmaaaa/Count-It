@@ -1,4 +1,4 @@
-# 🌟 Project Name 🌟
+# 🌟 Count-It 🌟
 
 Welcome to the Count-It repository! This branch contains the essential components for our project: frontend, backend, and database.
 
