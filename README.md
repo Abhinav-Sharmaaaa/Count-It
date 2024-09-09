@@ -6,6 +6,8 @@ Welcome to the Count-It repository! This branch contains the essential component
 
 This branch contains the following components:
 
-Frontend: 🖥️ Files related to the user interface.
+Frontend: 🖥️ Files related to the user interface.  
+
 Backend: 🛠️ Files related to the server-side logic.
+
 Database: 🗄️ Files related to the database schema and migrations.
