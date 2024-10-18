@@ -1,6 +1,6 @@
 
 import React from 'react';
-import logo from '../media/logo.jpg';
+import logo from '../media/appLogo.jpg';
 import '../styles/about.css';
 
 function About() {
