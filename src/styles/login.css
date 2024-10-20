@@ -1,0 +1,131 @@
+.mask{
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    backdrop-filter: blur(10px);
+}
+
+.loginBox{
+    background-color: rgb(255, 255, 255);
+    color: rgb(15, 58, 133);
+    padding: 35px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 20px 5px rgb(23, 23, 23);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 12px;
+    position: relative;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.loginBox h1{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.cross{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.form-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+.input-fields{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.input-fields label{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.input-fields input{
+    width: 300px;
+    height: 50px;
+    box-sizing: border-box;
+    color: gray;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    background: transparent;
+    box-shadow: 1px 1px 5px 3px rgba(1, 29, 72, 0.543);
+    padding: 2px 20px;
+}
+
+.login{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.login button{
+    width: 200px;
+    height: 40px;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 20px;
+    background-color: rgb(0, 89, 213);
+    box-shadow: 1px 1px 5px 3px black;
+}
+
+.hide-warning{
+    visibility: hidden;
+}
+
+.show-warning{
+    visibility: inherit;
+    color: rgb(161, 5, 5);
+    font-weight: normal;
+}
+
+.slide-down{
+    animation: top-middle 0.6s ease-in-out;
+}
+
+@keyframes top-middle{
+    0%{
+        transform: translateY(-100%);
+    }
+    100%{
+        transform: translateY(0);
+    }
+}
+
+.wrongPass{
+    animation: shake .12s  2 ease-in-out;
+}
+
+@keyframes shake {
+    0%{
+        transform: translateX(5%);
+    }
+    25%{
+        transform: translateX(0);
+    }
+    50%{
+        transform: translateX(-5%);
+    }
+    100%{
+        transform: translate(0);
+    }
+}
