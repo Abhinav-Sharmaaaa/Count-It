@@ -1,0 +1,4 @@
+* text=auto
+*.png binary
+*.jpg binary
+src.zip filter=lfs diff=lfs merge=lfs -text
