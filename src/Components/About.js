@@ -1,16 +1,16 @@
-
 import React from 'react';
 import logo from '../media/appLogo.jpg';
-import '../styles/about.css';
+import '../Styles/about.css';
 
 function About() {
   return (
-    <div className="App">
-      <header>
-        <br />
-        <br />
-        <h3 id="name">ABOUT US</h3>
-      </header>
+    <div className="about-layout"> 
+
+    <div className='about-body'>
+
+
+      <h3 id="name">ABOUT US</h3>
+
       <main className="body">
         <section className="content">
           <div className="text">
@@ -37,6 +37,8 @@ function About() {
           <img src={logo} id="logo" alt="Count-It Logo" />
         </section>
       </main>
+      
+    </div>
     </div>
   );
 }
