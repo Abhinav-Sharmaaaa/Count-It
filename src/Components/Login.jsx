@@ -10,8 +10,8 @@ export default function Login(){
     let {login,setisLoginVisible} = useUserContext();
     const nav = useNavigate();
     
-    const [username, setusername] = useState("aneesh");
-    const [pass, setpass] = useState('1234');
+    const [username, setusername] = useState("");
+    const [pass, setpass] = useState('');
     const [isWrongPass, setisWrongPass] = useState(false);
     
 
@@ -23,7 +23,7 @@ export default function Login(){
 
     function handleLogin(e){
       e.preventDefault();
-      let [authenticated] = users.filter((obj)=>obj.upass== '1234' && obj.uname == 'aneesh');
+      let [authenticated] = users.filter((obj)=>obj.upass== pass && obj.uname == username);
       if(authenticated){
         console.log(authenticated.role);
         login(authenticated.ubranchId);
