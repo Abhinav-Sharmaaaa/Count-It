@@ -1,5 +1,7 @@
-com\Minor_Project\Count_it\Services\UserService.class
-com\Minor_Project\Count_it\Controllers\UserController.class
 com\Minor_Project\Count_it\CountItApplication.class
-com\Minor_Project\Count_it\Repository\UserRepository.class
 com\Minor_Project\Count_it\Models\User.class
+com\Minor_Project\Count_it\Controllers\AuthController.class
+com\Minor_Project\Count_it\Repositories\UserRepository.class
+com\Minor_Project\Count_it\WebConfig.class
+com\Minor_Project\Count_it\Models\LoginRequest.class
+com\Minor_Project\Count_it\SecurityConfig.class
