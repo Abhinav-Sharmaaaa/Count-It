@@ -2,12 +2,68 @@ import React,{useState} from 'react'
 import '../Styles/Inventory.css'
 import { useUserContext } from '../Context/LoginContext';
 import DataTable from './DataTable';
+import DataInsertionForm from './DataInsertionForm';
+import { TableDataContext } from '../Context/TableDataContext';
 
 
 export default function Inventory() {
 
   const [showInsertForm, setshowInsertForm] = useState(false);
   const {imgs} = useUserContext();
+
+
+  const [data, setdata] = useState([
+    { product: 'Example', price: 100, quantity: 2, totalPrice: 200, date: '2023-10-22', status: 'Available', edit:true, delete: true, },
+    { product: 'Example Product', price: 100, quantity: 2, totalPrice: 200, date: '2023-10-22', status: 'Available', edit:true, delete: true, },
+    { product: 'Example Product', price: 100, quantity: 2, totalPrice: 200, date: '2023-10-22', status: 'Available', edit:true, delete: true, },
+    { product: 'Example Product', price: 100, quantity: 2, totalPrice: 200, date: '2023-10-22', status: 'Available', edit:true, delete: true, },
+    { product: 'Example Product', price: 100, quantity: 2, totalPrice: 200, date: '2023-10-22', status: 'Available', edit:true, delete: true, },
+    ]);
+
+  const columns = [
+    { header: 'Product', accessor: 'product' },
+    { header: 'Price', accessor: 'price' },
+    { header: 'Quantity', accessor: 'quantity' },
+    { header: 'Total Price', accessor: 'totalPrice' },
+    { header: 'Date', accessor: 'date' },
+    { header: 'Status', accessor: 'status' },
+  ];
+
+  const fields = [
+    { label: 'Product', name: 'product', type: 'text', required: true },
+    { label: 'Price', name: 'price', type: 'number', required: true },
+    { label: 'Quantity', name: 'quantity', type: 'number', required: true },
+    { label: 'Date', name: 'date', type: 'date', required: true },
+    { label: 'Status', name: 'status', type: 'select', options: [{ label: 'Available', value: 'Available' }, { label: 'Out-of-Stock', value: 'Out of Stock' }], required: true },
+  ];
+
+  const [formData, setFormData] = useState({
+    product: '',
+    price: '',
+    quantity: '',
+    date: '',
+    status: '',
+    edit:true,
+    delete:true,
+  });
+  
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setdata([...data,formData]);
+    setFormData({
+      // product: '',
+      // price: '',
+      // quantity: '',
+      // date: '',
+      // status: '',
+      // edit:true,
+      // delete:true,
+    });
+  };
 
   return(
     <div className='component'>
@@ -17,70 +73,14 @@ export default function Inventory() {
         <div className="actions-to-perform btn"  onClick={()=>setshowInsertForm(!showInsertForm)}> <img src={imgs.plusIcon} alt="" /> Insert</div>
       </div>
 
-      <DataTable showInsertForm={showInsertForm} setshowInsertForm={setshowInsertForm}/>
+    <TableDataContext.Provider value={data}>
 
+      <DataInsertionForm fields={fields} formData={formData} handleChange={handleChange} handleSubmit={handleSubmit} showInsertForm={showInsertForm}/>
+      <DataTable columns={columns} showActions={true}/>
+
+    </TableDataContext.Provider>
     </div>
   );
 }
 
-export const StockForm = ({ addItem , showInsertForm}) => {
-  const [formData, setFormData] = useState({
-    product: '',
-    price: '',
-    amount: '',
-    totalPrice: '',
-    date: '',
-    status: ''
-  });
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    addItem(formData);
-    setFormData({
-      product: '',
-      price: '',
-      amount: '',
-      totalPrice: '',
-      date: '',
-      status: ''
-    });
-  };
-
-  return (
-    <div className={`stock-form-container  ${showInsertForm ? 'insert-form-visible':''}`}>
-      <h2>Add New Item</h2>
-      <form className='insert-form' onSubmit={handleSubmit}>
-        <label>
-          Product:
-          <input type="text" name="product" value={formData.product} onChange={handleChange} required />
-        </label>
-        <label>
-          Price:
-          <input type="number" name="price" value={formData.price} onChange={handleChange} required />
-        </label>
-        <label>
-          Amount:
-          <input type="number" name="amount" value={formData.amount} onChange={handleChange} required />
-        </label>
-        <label>
-          Total Price:
-          <input type="number" name="totalPrice" value={formData.totalPrice} onChange={handleChange} required />
-        </label>
-        <label>
-          Date:
-          <input type="date" name="date" value={formData.date} onChange={handleChange} required />
-        </label>
-        <label>
-          Status:
-          <input type="text" name="status" value={formData.status} onChange={handleChange} required />
-        </label>
-        <button className='btn' type="submit">Add Item</button>
-      </form>
-    </div>
-  );
-};
 
