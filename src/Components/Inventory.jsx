@@ -7,9 +7,10 @@ import { TableDataContext } from '../Context/TableDataContext';
 import axios from 'axios';
 
 export default function Inventory() {
-  const [showInsertForm, setshowInsertForm] = useState(false);
+  const [showInsertForm, setShowInsertForm] = useState(false);
   const { imgs } = useUserContext();
   const [data, setData] = useState([]);
+  const [editingItem, setEditingItem] = useState(null);
 
   const columns = [
     { header: 'Product', accessor: 'productName' },
@@ -42,8 +43,20 @@ export default function Inventory() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://count-it-login.onrender.com/inventory/products', formData);
-      setData([...data, response.data]);
+      if (editingItem) {
+        // Update existing item
+        const response = await axios.put(`https://count-it-login.onrender.com/api/inventory/${editingItem.id}`, formData);
+        
+        // Update local state with the modified item
+        setData(data.map(item => item.id === editingItem.id ? { ...item, ...formData } : item));
+        setEditingItem(null);
+      } else {
+        // Add new item
+        const response = await axios.post('https://count-it-login.onrender.com/api/inventory', formData);
+        setData([...data, response.data]);
+      }
+
+      // Reset form data
       setFormData({
         productName: '',
         price: '',
@@ -51,15 +64,31 @@ export default function Inventory() {
         date: '',
         status: '',
       });
+      setShowInsertForm(false);
     } catch (error) {
-      console.error('Error adding product:', error);
+      console.error('Error adding/updating product:', error);
+    }
+  };
+
+  const handleEdit = (item) => {
+    setEditingItem(item);
+    setFormData(item);
+    setShowInsertForm(true);
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`https://count-it-login.onrender.com/api/inventory/${id}`);
+      setData(data.filter(item => item.id !== id));
+    } catch (error) {
+      console.error('Error deleting product:', error);
     }
   };
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('https://count-it-login.onrender.com/inventory/products');
+        const response = await axios.get('https://count-it-login.onrender.com/api/inventory');
         setData(response.data);
       } catch (error) {
         console.error('Error fetching products:', error);
@@ -72,13 +101,13 @@ export default function Inventory() {
   return (
     <div className='component'>
       <div className="upper-half">
-        <div className="component-title"> <img src={imgs.inventoryIcon}/> Inventory</div>
-        <div className="actions-to-perform btn" onClick={() => setshowInsertForm(!showInsertForm)}> <img src={imgs.plusIcon} alt="" /> Insert</div>
+        <div className="component-title"> <img src={imgs.inventoryIcon} alt="Inventory" /> Inventory</div>
+        <div className="actions-to-perform btn" onClick={() => setShowInsertForm(!showInsertForm)}> <img src={imgs.plusIcon} alt="Add" /> Insert</div>
       </div>
 
       <TableDataContext.Provider value={data}>
         <DataInsertionForm fields={fields} formData={formData} handleChange={handleChange} handleSubmit={handleSubmit} showInsertForm={showInsertForm} />
-        <DataTable columns={columns} showActions={true} />
+        <DataTable columns={columns} showActions={true} onDelete={handleDelete} onEdit={handleEdit} />
       </TableDataContext.Provider>
     </div>
   );

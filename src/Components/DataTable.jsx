@@ -1,18 +1,14 @@
-import React from 'react'
+import React from 'react';
 import { useUserContext } from '../Context/LoginContext';
 import { useTableDataContext } from '../Context/TableDataContext';
 
-export default function DataTable({columns,showActions}) {
-
-  const {imgs,component} = useUserContext();
+export default function DataTable({ columns, showActions, onDelete, onEdit }) {
+  const { imgs, component } = useUserContext();
   const data = useTableDataContext();
 
   return (
-    <>
-
-      <div className="stock-table-container">
-
-        <h2>{component.toUpperCase().slice(1)}</h2>
+    <div className="stock-table-container">
+      <h2>{component.toUpperCase().slice(1)}</h2>
 
       <table>
         <thead>
@@ -30,19 +26,25 @@ export default function DataTable({columns,showActions}) {
                 <td key={colIndex}>{row[column.accessor]}</td>
               ))}
               {showActions && (
-                <td className='actions'>
-                  {row.edit !== undefined && <button className='actions-to-perform edit-btn btn'> <img src={imgs.editIcon}/> Edit</button>
-                }
-                  {row.delete !== undefined && <button className='actions-to-perform delete-btn btn'> <img src={imgs.deleteIcon}/> Delete</button>
-                }
+                <td className="actions">
+                  <button
+                    className="actions-to-perform edit-btn btn"
+                    onClick={() => onEdit(row)} // Call onEdit function with row data
+                  >
+                    <img src={imgs.editIcon} alt="Edit" /> Edit
+                  </button>
+                  <button
+                    className="actions-to-perform delete-btn btn"
+                    onClick={() => onDelete(row.id)} // Call onDelete function with row ID
+                  >
+                    <img src={imgs.deleteIcon} alt="Delete" /> Delete
+                  </button>
                 </td>
               )}
             </tr>
           ))}
         </tbody>
       </table>
-      </div>
-
-    </>
-  )
+    </div>
+  );
 }
