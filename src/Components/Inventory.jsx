@@ -52,7 +52,7 @@ export default function Inventory() {
         setEditingItem(null);
       } else {
         // Add new item
-        const response = await axios.post('https://count-it-login.onrender.com/api/inventory', formData);
+        const response = await axios.post('https://count-it-login.onrender.com/api/inventory/', formData);
         setData([...data, response.data]);
       }
 
@@ -88,7 +88,7 @@ export default function Inventory() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('https://count-it-login.onrender.com/api/inventory');
+        const response = await axios.get('https://count-it-login.onrender.com/api/inventory/');
         setData(response.data);
       } catch (error) {
         console.error('Error fetching products:', error);
