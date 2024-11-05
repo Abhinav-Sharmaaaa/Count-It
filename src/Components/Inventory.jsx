@@ -45,14 +45,18 @@ export default function Inventory() {
     try {
       if (editingItem) {
         // Update existing item
-        const response = await axios.put(`https://count-it-login.onrender.com/inventory/${editingItem.id}`, formData);
+        const response = await axios.put(`https://count-it-login.onrender.com/api/inventory/${editingItem.id}`, formData, {
+          headers: { 'X-Requested-With': 'XMLHttpRequest' }
+        });
         
         // Update local state with the modified item
         setData(data.map(item => item.id === editingItem.id ? { ...item, ...formData } : item));
         setEditingItem(null);
       } else {
         // Add new item
-        const response = await axios.post('https://count-it-login.onrender.com/inventory/', formData);
+        const response = await axios.post('https://cors-anywhere.herokuapp.com/https://count-it-login.onrender.com/api/inventory/', formData, {
+          headers: { 'X-Requested-With': 'XMLHttpRequest' }
+        });
         setData([...data, response.data]);
       }
 
@@ -78,7 +82,9 @@ export default function Inventory() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`https://count-it-login.onrender.com/inventory/${id}`);
+      await axios.delete(`https://count-it-login.onrender.com/api/inventory/${id}`, {
+        headers: { 'X-Requested-With': 'XMLHttpRequest' }
+      });
       setData(data.filter(item => item.id !== id));
     } catch (error) {
       console.error('Error deleting product:', error);
@@ -88,7 +94,9 @@ export default function Inventory() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('https://count-it-login.onrender.com/api/inventory');
+        const response = await axios.get('https://count-it-login.onrender.com/api/inventory/', {
+          headers: { 'X-Requested-With': 'XMLHttpRequest' }
+        });
         setData(response.data);
       } catch (error) {
         console.error('Error fetching products:', error);
@@ -101,8 +109,12 @@ export default function Inventory() {
   return (
     <div className='component'>
       <div className="upper-half">
-        <div className="component-title"> <img src={imgs.inventoryIcon} alt="Inventory" /> Inventory</div>
-        <div className="actions-to-perform btn" onClick={() => setShowInsertForm(!showInsertForm)}> <img src={imgs.plusIcon} alt="Add" /> Insert</div>
+        <div className="component-title">
+          <img src={imgs.inventoryIcon} alt="Inventory" /> Inventory
+        </div>
+        <div className="actions-to-perform btn" onClick={() => setShowInsertForm(!showInsertForm)}>
+          <img src={imgs.plusIcon} alt="Add" /> Insert
+        </div>
       </div>
 
       <TableDataContext.Provider value={data}>
