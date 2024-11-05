@@ -13,6 +13,7 @@ import LayoutDrawer from './Layouts/LayoutDrawer';
 import LayoutNoDrawer from './Layouts/LayoutNoDrawer';
 import Allotment from './Components/Allotment';
 import Returned from './Components/Returned';
+import { startPing } from './Components/keepTheSiteAwake';
 
 function App() {
     const [isLoginVisible, setisLoginVisible] = useState(false);
@@ -24,6 +25,13 @@ function App() {
     const location = useLocation();
     const drawerNeedingComponents = ['/inventory', '/user-profile', '/allotment', '/returned'];
     const needDrawer = drawerNeedingComponents.includes(location.pathname);
+
+    // Start pinging to keep the backend awake
+    useEffect(() => {
+        const stopPing = startPing();
+
+        return () => stopPing(); // Cleanup the interval when the component unmounts
+    }, []);
 
     // Check for stored role and token in localStorage
     useEffect(() => {
@@ -80,7 +88,7 @@ function App() {
                 )
             }
         </UserContext.Provider>
-    )
+    );
 }
 
 export default App;
