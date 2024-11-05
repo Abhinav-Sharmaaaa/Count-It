@@ -1,19 +1,24 @@
-// src/utils/pingService.js
+import React, { useEffect } from 'react';
+import axios from 'axios';
 
-export function startPing() {
-    const interval = setInterval(() => {
-        console.log("Sending ping to backend...");
+const KeepTheSiteAwake = () => {
+    useEffect(() => {
+        const interval = setInterval(() => {
+            console.log("Sending ping to backend...");
 
-        fetch("https://count-it-login.onrender.com/api/ping")
-            .then(response => {
-                if (response.ok) {
-                    console.log("Ping successful:", response.status);
-                } else {
-                    console.error("Ping failed with status:", response.status);
-                }
-            })
-            .catch(error => console.error("Ping failed:", error));
-    }, 6000); // 10 minutes in milliseconds
+            axios.get("https://count-it-login.onrender.com/ping")
+                .then(response => {
+                    console.log("Ping successful:", response.data);
+                })
+                .catch(error => {
+                    console.log("Ping failed:", error);
+                });
+        }, 840000); // Every 60 seconds
 
-    return () => clearInterval(interval);
-}
+        return () => clearInterval(interval); // Cleanup interval on unmount
+    }, []);
+
+    return null; // Or any JSX if needed
+};
+
+export default KeepTheSiteAwake;

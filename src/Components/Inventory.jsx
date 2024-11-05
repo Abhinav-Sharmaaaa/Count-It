@@ -45,14 +45,14 @@ export default function Inventory() {
     try {
       if (editingItem) {
         // Update existing item
-        const response = await axios.put(`https://count-it-login.onrender.com/api/inventory/${editingItem.id}`, formData);
+        const response = await axios.put(`https://count-it-login.onrender.com/inventory/${editingItem.id}`, formData);
         
         // Update local state with the modified item
         setData(data.map(item => item.id === editingItem.id ? { ...item, ...formData } : item));
         setEditingItem(null);
       } else {
         // Add new item
-        const response = await axios.post('https://count-it-login.onrender.com/api/inventory/', formData);
+        const response = await axios.post('https://count-it-login.onrender.com/inventory/', formData);
         setData([...data, response.data]);
       }
 
@@ -78,7 +78,7 @@ export default function Inventory() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`https://count-it-login.onrender.com/api/inventory/${id}`);
+      await axios.delete(`https://count-it-login.onrender.com/inventory/${id}`);
       setData(data.filter(item => item.id !== id));
     } catch (error) {
       console.error('Error deleting product:', error);
@@ -88,7 +88,7 @@ export default function Inventory() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('https://count-it-login.onrender.com/api/inventory/');
+        const response = await axios.get('https://count-it-login.onrender.com/api/inventory');
         setData(response.data);
       } catch (error) {
         console.error('Error fetching products:', error);
