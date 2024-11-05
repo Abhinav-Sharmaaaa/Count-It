@@ -23,7 +23,7 @@ export default function Login() {
         console.log("Logging in with:", { username, password }); // Log the credentials
         
         try {
-            const response = await axios.post('https://count-it-login.onrender.com/login', {
+            const response = await axios.post('/login', {
                 username,
                 password,
             });
