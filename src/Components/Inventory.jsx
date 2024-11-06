@@ -45,7 +45,7 @@ export default function Inventory() {
     try {
       if (editingItem) {
         // Update existing item
-        const response = await axios.put(`https://count-it-login.onrender.com/api/inventory/${editingItem.id}`, formData, {
+        await axios.put(`https://count-it-login.onrender.com/api/inventory/${editingItem.id}`, formData, {
           headers: { 'X-Requested-With': 'XMLHttpRequest' }
         });
         
@@ -54,7 +54,7 @@ export default function Inventory() {
         setEditingItem(null);
       } else {
         // Add new item
-        const response = await axios.post('https://cors-anywhere.herokuapp.com/https://count-it-login.onrender.com/api/inventory/', formData, {
+        const response = await axios.post('https://count-it-login.onrender.com/api/inventory/', formData, {
           headers: { 'X-Requested-With': 'XMLHttpRequest' }
         });
         setData([...data, response.data]);
@@ -94,7 +94,7 @@ export default function Inventory() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('https://count-it-login.onrender.com/api/inventory/', {
+        const response = await axios.get('https://count-it-login.onrender.com/api/inventory', {
           headers: { 'X-Requested-With': 'XMLHttpRequest' }
         });
         setData(response.data);
