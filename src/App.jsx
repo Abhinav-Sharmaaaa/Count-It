@@ -7,11 +7,11 @@ import User from './Components/User';
 import uData from './TempoaryData/usersData';
 import imgs from './TempoaryData/Images';
 import { UserContext } from './Context/LoginContext';
-import Inventory from './Components/Inventory';
+import Inventory from './Components/CollegeInventory';
 import About from './Components/About';
 import LayoutDrawer from './Layouts/LayoutDrawer';
 import LayoutNoDrawer from './Layouts/LayoutNoDrawer';
-import Allotment from './Components/Allotment';
+import Allotment from './Components/CollegeAllotment';
 import Returned from './Components/Returned';
 import KeepTheSiteAwake from './Components/keepTheSiteAwake'; // Adjust path as necessary
 

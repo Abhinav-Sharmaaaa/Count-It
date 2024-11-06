@@ -6,7 +6,7 @@ const KeepTheSiteAwake = () => {
         const interval = setInterval(() => {
             console.log("Sending ping to backend...");
 
-            axios.get("https://cors-anywhere.herokuapp.com/https://count-it-login.onrender.com/ping")
+            axios.get("https://count-it-login.onrender.com/ping")
                 .then(response => {
                     console.log("Ping successful:", response.data);
                 })
