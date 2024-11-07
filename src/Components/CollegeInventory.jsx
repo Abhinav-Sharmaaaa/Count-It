@@ -16,6 +16,7 @@ export default function Inventory() {
     { header: 'Product', accessor: 'productName' },
     { header: 'Price', accessor: 'price' },
     { header: 'Quantity', accessor: 'quantity' },
+    { header: 'Total  Pricce', accessor: 'totalPrice' },
     { header: 'Date', accessor: 'date' },
     { header: 'Status', accessor: 'status' },
   ];

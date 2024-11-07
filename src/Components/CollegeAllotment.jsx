@@ -14,6 +14,7 @@ export default function Allotment() {
     price: '',
     quantity: '',
     status: '',
+    lab: '',
     date: '', // Added date field
     branch: '' // Changed to branch
   });
@@ -25,9 +26,9 @@ export default function Allotment() {
     { header: 'Product', accessor: 'product' },
     { header: 'Price', accessor: 'price' },
     { header: 'Quantity', accessor: 'quantity' },
-    { header: 'Total Price', accessor: 'totalPrice' },
     { header: 'Date', accessor: 'date' },
     { header: 'Branch', accessor: 'branch' }, // Updated header
+    { header: 'Lab', accessor: 'Lab' },
     { header: 'Status', accessor: 'status' }
   ];
 
@@ -36,9 +37,18 @@ export default function Allotment() {
     { label: 'Product', name: 'product', type: 'text', required: true },
     { label: 'Price', name: 'price', type: 'number', required: true },
     { label: 'Quantity', name: 'quantity', type: 'number', required: true },
-    { label: 'Status', name: 'status', type: 'select', options: [{ label: 'Available', value: 'Available' }, { label: 'Out-of-Stock', value: 'Out of Stock' }], required: true },
     { label: 'Date', name: 'date', type: 'date', required: true },  // Added date field
-    { label: 'Branch', name: 'branch', type: 'text', required: true } // Changed to branch
+    { label: 'Branch', name: 'branch', type: 'select', options:
+    [
+      { label: 'CSE', value: 'CSE' },
+      { label: 'IT', value: 'IT' },
+      { label: 'CIVIL', value: 'CIVIL' },
+      { label: 'ELEX.', value: 'ELEX.' },
+      { label: 'MECH.', value: 'MECH.' },
+      { label: 'MECH. Auto', value: 'MECH Auto' },
+    ], required: true },
+    { label: 'Lab', name: 'Lab', type: 'text', required: true },  // Added date field
+    { label: 'Status', name: 'status', type: 'select', options: [{ label: 'Available', value: 'Available' }, { label: 'Out-of-Stock', value: 'Out of Stock' }], required: true },
   ];
 
   // Fetch data from the backend when the component is mounted
@@ -67,7 +77,7 @@ export default function Allotment() {
         .then((updatedItem) => {
           setData(data.map((item) => (item.id === updatedItem.id ? updatedItem : item)));
           setEditingItem(null); // Reset editing mode
-          setFormData({ product: '', price: '', quantity: '', status: '', date: '', branch: '' }); // Reset form
+          setFormData({ product: '', price: '', quantity: '', status: '', date: '', branch: '' ,lab:''}); // Reset form
         })
         .catch((error) => console.error('Error updating item:', error));
     } else {
@@ -80,7 +90,7 @@ export default function Allotment() {
         .then((response) => response.json())
         .then((newItem) => {
           setData([...data, newItem]);
-          setFormData({ product: '', price: '', quantity: '', status: '', date: '', branch: '' }); // Reset form
+          setFormData({ product: '', price: '', quantity: '', status: '', date: '', branch: '' , lab:''}); // Reset form
         })
         .catch((error) => console.error('Error adding item:', error));
     }

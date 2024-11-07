@@ -7,21 +7,20 @@ export default function Returned() {
   const {imgs} = useUserContext();
 
   const data = [
-    { product: 'Example jfjkagh ', price: 100, quantity: 2, totalPrice: 200, date: '2023-10-22', status: 'Available', edit:true, delete: true, },
-    { product: 'Example Product', price: 100, quantity: 2, totalPrice: 200, date: '2023-10-22', status: 'Available', edit:true, delete: true, },
-    { product: 'Example Product', price: 100, quantity: 2, totalPrice: 200, date: '2023-10-22', status: 'Available', edit:true, delete: true, },
-    { product: 'Example Product', price: 100, quantity: 2, totalPrice: 200, date: '2023-10-22', status: 'Available', edit:true, delete: true, },
-    { product: 'Example Product', price: 100, quantity: 2, totalPrice: 200, date: '2023-10-22', status: 'Available', edit:true, delete: true, },
+    { product: 'Example jfjkagh ', quantity: 2, date: '2023-10-22',branch:'cse',reason:'unkown', status: 'Available',},
+    { product: 'Example Product', quantity: 2, date: '2023-10-22',branch:'cse',reason:'unkown', status: 'Available', },
+    { product: 'Example Product', quantity: 2, date: '2023-10-22',branch:'cse',reason:'unkown', status: 'Available', },
+    { product: 'Example Product', quantity: 2, date: '2023-10-22',branch:'cse',reason:'unkown', status: 'Available', },
+    { product: 'Example Product', quantity: 2, date: '2023-10-22',branch:'cse',reason:'unkown', status: 'Available', },
     ];
 
     const columns = [
       { header: 'Product', accessor: 'product' },
-      { header: 'Price', accessor: 'price' },
       { header: 'Quantity', accessor: 'quantity' },
       { header: 'Date', accessor: 'date' },
+      { header: 'Branch', accessor: 'branch' },
+      { header: 'Reason', accessor: 'reason' },
       { header: 'Status', accessor: 'status' },
-      { header: 'Lab', accessor: '' },
-      { header: 'Branch', accessor: '' },
     ];
 
   return (
@@ -34,7 +33,7 @@ export default function Returned() {
 
       <TableDataContext.Provider value={data}>
 
-      <DataTable columns={columns} data={data} showActions={true}/>
+      <DataTable columns={columns} data={data}/>
 
       </TableDataContext.Provider>
 

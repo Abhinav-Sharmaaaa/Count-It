@@ -38,12 +38,15 @@ export default function Login() {
         } catch (error) {
             console.error("Login failed:", error);
             setIsWrongPass(true);
+            setTimeout(() => {
+                setIsWrongPass(false);
+            }, 1000);
         }
     }
 
     return (
         <div className="mask">
-            <div className={`slide-down loginBox ${isWrongPass ? 'wrongPass' : ''}`}>
+            <div className={`slide-down loginBox ${isWrongPass ? ' wrongPass ' : ''}`}>
                 <h1><FaSignInAlt /> Login</h1>
                 <span className='cross' onClick={removeLoginPage}><FaTimes size='25px' /></span>
                 <form onSubmit={handleLogin} className='form-container'>
