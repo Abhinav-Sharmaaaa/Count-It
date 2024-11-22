@@ -10,6 +10,7 @@ let imgs = {
     deleteIcon: 'Images/deleteIcon.svg',
     editIcon: 'Images/editIcon.svg',
     clearIcon: 'Images/clearIcon.svg',
+    profilePic: 'Images/profileIcon.svg',
 }
 
 export default imgs;

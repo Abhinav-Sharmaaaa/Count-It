@@ -11,6 +11,7 @@ export default function Inventory() {
   const { imgs } = useUserContext();
   const [data, setData] = useState([]);
   const [editingItem, setEditingItem] = useState(null);
+  const [isEditing, setisEditing] = useState(false);
 
   const columns = [
     { header: 'Product', accessor: 'productName' },
@@ -39,6 +40,7 @@ export default function Inventory() {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    console.log([e.target.name]);
   };
 
   const handleSubmit = async (e) => {
@@ -60,7 +62,7 @@ export default function Inventory() {
         });
         setData([...data, response.data]);
       }
-
+      
       // Reset form data
       setFormData({
         productName: '',
@@ -70,6 +72,7 @@ export default function Inventory() {
         status: '',
       });
       setShowInsertForm(false);
+      setisEditing(false);
     } catch (error) {
       console.error('Error adding/updating product:', error);
     }
@@ -79,6 +82,7 @@ export default function Inventory() {
     setEditingItem(item);
     setFormData(item);
     setShowInsertForm(true);
+    setisEditing(true);
   };
 
   const handleDelete = async (id) => {
@@ -119,7 +123,7 @@ export default function Inventory() {
       </div>
 
       <TableDataContext.Provider value={data}>
-        <DataInsertionForm fields={fields} formData={formData} handleChange={handleChange} handleSubmit={handleSubmit} showInsertForm={showInsertForm} />
+        <DataInsertionForm fields={fields} formData={formData} handleChange={handleChange} handleSubmit={handleSubmit} showInsertForm={showInsertForm} isEditing={isEditing} />
         <DataTable columns={columns} showActions={true} onDelete={handleDelete} onEdit={handleEdit} />
       </TableDataContext.Provider>
     </div>

@@ -23,6 +23,8 @@ export default function DataTable({ columns, showActions, onDelete, onEdit }) {
           {data.map((row, rowIndex) => (
             <tr key={rowIndex}>
               {columns.map((column, colIndex) => (
+                column.accessor === 'totalPrice' ? 
+                <td key={colIndex}>{row.quantity * row.price}</td> :
                 <td key={colIndex}>{row[column.accessor]}</td>
               ))}
               {showActions && (

@@ -18,7 +18,6 @@ import KeepTheSiteAwake from './Components/keepTheSiteAwake'; // Adjust path as 
 function App() {
     const [isLoginVisible, setisLoginVisible] = useState(false);
     const [isLogedin, setisLogedin] = useState(false);
-    const [branch, setbranch] = useState(-1);
     const [userData, setuserData] = useState('');
     const [role, setRole] = useState(''); // State for storing user role
 
@@ -36,16 +35,13 @@ function App() {
         }
     }, []);
 
-    function login(role, branchId = 1) {
-        let [userData] = uData.filter((users) => users.branchId === branchId);
-        setuserData(userData);
+    function login(role) {
         setisLogedin(true);
         setRole(role); // Set role from login
-        setbranch(branchId);
     }
 
     let values = {
-        isLogedin,
+        isLogedin:true,
         isLoginVisible,
         setisLoginVisible,
         setisLogedin,

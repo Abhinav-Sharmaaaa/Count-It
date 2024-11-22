@@ -28,6 +28,8 @@ export default function Login() {
                 password,
             });
 
+            console.log(response);
+
             if (response.status === 200) {
                 const { message, role } = response.data; // Destructure message and role
                 localStorage.setItem('role', role); // Store the role

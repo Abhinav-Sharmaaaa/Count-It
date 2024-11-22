@@ -1,0 +1,104 @@
+.topSection{
+    width: 100%;
+    padding: 2rem 4rem;
+    border-radius: 5px;
+    align-items: center;
+    background-color: #f9f9f9;
+    margin-bottom: 30px;
+}
+
+.topSection .top{
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.topSection img{
+    height: 150px;
+    border-radius: 50%;
+    border: 10px solid rgb(229, 230, 231);
+    box-shadow: 2px 2px 5px #232121;
+    padding: 10px;
+}
+
+.topSection h3{
+    font-size: 30px;
+    padding: 5px 2px;
+}
+.topSection h4{
+    padding: 5px 2px;
+    font-size: 20px;
+}
+
+.userdata{
+    padding: 15px;
+    width: 50%;
+    min-width: fit-content;
+    margin-top: 50px;
+    border: 10px solid rgb(229, 230, 231);
+    border-radius: 10px;
+}
+
+.userdata form{
+    display: flex;
+    align-items: start;
+    gap: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    flex-direction: column;
+    background-color: #f9f9f9;
+}
+
+.userdata input{
+    color: black;
+    background: transparent;
+    font-size: 18px;
+    border: none;
+    margin-left: 10px;
+}
+
+.middleSection{
+    width: 100%;
+    display: flex;
+    border-radius: 5px;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f9f9f9;
+    padding: 1rem 4rem;
+}
+
+.middleSection .notifications-heading{
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.middleSection button{
+    font-size: 18px;
+    padding: 3px 8px;
+    border: none;
+    background-color: rgb(72, 72, 251);
+    border-radius: 10px;
+}
+
+.notifications{
+    width: 100%;   
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    padding: 2rem 1rem;
+    margin-top: 20px;
+}
+
+.notifications li{
+    list-style: inside;
+    padding: 10px 3rem ;
+    font-size: 18px;
+    margin: 2px;
+}
+
+.notifications li:nth-child(even) {
+    background-color: #f7f7f7;
+}
+  
+.notifications li:nth-child(odd) {
+    background-color: #f0f0f0;
+}

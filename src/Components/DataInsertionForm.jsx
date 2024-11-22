@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import '../Styles/DataInsertionForm.css'
 
-const DataInsertionForm = ({ fields, formData, handleChange, handleSubmit,showInsertForm}) => {
+const DataInsertionForm = ({ fields, formData, handleChange, handleSubmit,showInsertForm, isEditing}) => {
 
   return (
     <div className={`stock-form-container  ${showInsertForm ? 'insert-form-visible':''}`}>
@@ -20,18 +20,21 @@ const DataInsertionForm = ({ fields, formData, handleChange, handleSubmit,showIn
                   <option key={idx} value={option.value}>{option.label}</option>
                 ))}
               </select>
+              
             ) : (
-              <input
+
+                <input
                 type={field.type}
                 name={field.name}
                 value={formData[field.name]}
                 onChange={handleChange}
                 required={field.required}
-              />
+              />  
+
             )}
           </label>
         ))}
-        <button className='btn' type="submit">Add Item</button>
+        <button className='btn' type="submit"> {isEditing ? 'Update' : 'Add'}</button>
 
       </form>
 
