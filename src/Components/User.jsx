@@ -11,7 +11,6 @@ export default function User() {
   const [dob, setdob] = useState("12-12-2004")
 
   const [notifications, setnotifications] = useState([
-    "he he he ...i am the god...you motherfucker just worship me 😈",
     "feiu kdfjkhg  lhfh euiot jjsdfkjh g iuio  jjgh ",
     "vbnskdjhbty feiu kdfjkhg  lhfh euiot  g iuio  jjgh ",
     "ngoasruty feiu kd euiot jjsdfkjh g iuio  jjgh ",

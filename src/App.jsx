@@ -41,7 +41,7 @@ function App() {
     }
 
     let values = {
-        isLogedin:true,
+        isLogedin,
         isLoginVisible,
         setisLoginVisible,
         setisLogedin,
