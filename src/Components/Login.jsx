@@ -31,8 +31,15 @@ export default function Login() {
             console.log(response);
 
             if (response.status === 200) {
-                const { message, role } = response.data; // Destructure message and role
-                localStorage.setItem('role', role); // Store the role
+                const { message } = response.data; // Extract message from the response
+
+                // Determine role based on the username
+                const role = username === 'Manager' ? 'manager' : 'teacher';
+
+                // Save username and role in localStorage
+                localStorage.setItem('username', username);
+                localStorage.setItem('role', role);
+
                 login(role);        
                 setisLoginVisible(false);
                 nav('/');           

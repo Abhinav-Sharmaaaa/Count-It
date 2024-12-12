@@ -1,98 +1,81 @@
-import React from 'react'
-import { useUserContext } from '../Context/LoginContext';
-import '../Styles/userProfile.css'
-import { FaUser } from 'react-icons/fa';
-import DataInsertionForm from './DataInsertionForm';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import '../Styles/User.css';  // Assuming you have the necessary styles in User.css
 
 export default function User() {
+    const [userData, setUserData] = useState(null);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
 
-  const {imgs} = useUserContext();
-  const [dob, setdob] = useState("12-12-2004")
+    // Fetch the username from local storage
+    const username = localStorage.getItem("username");
 
-  const [notifications, setnotifications] = useState([
-    "feiu kdfjkhg  lhfh euiot jjsdfkjh g iuio  jjgh ",
-    "vbnskdjhbty feiu kdfjkhg  lhfh euiot  g iuio  jjgh ",
-    "ngoasruty feiu kd euiot jjsdfkjh g iuio  jjgh ",
-    "pqmssk feiu kdfjkhg  lhfh euiot jjsdfkjh g iuio  jjgh ",
-    "mzwral feiu kdfjkhg  lhfh euiot jjsfgoierg  iuio  jjgh ",
-    "dgroighfeiu kdfjkhg vnsneoigujjsdfkjh g iuio  jjgh ",
-    "eruty feiu kdfjkhgtu vkr joiguo  jjgh ",
-    "ty feiu kdfjkhg  lhfh euiot jgoeirugon jjgh ",
-    "pqetrvuty feiu kdfjkhg  lwpro cbsyer ari kjh g iuio  jjgh ",
-    "ngoasruty feiu kd euiot jjsdfkjh g iuio  jjgh ",
-    "pqmssk feiu kdfjkhg  lhfh euiot jjsdfkjh g iuio  jjgh ",
-    "mzwral feiu kdfjkhg  lhfh euiot jjsfgoierg  iuio  jjgh ",
-    "dgroighfeiu kdfjkhg vnsneoigujjsdfkjh g",
-  ])
+    useEffect(() => {
+        if (!username) {
+            console.error("No username found in local storage.");
+            setError("No username provided.");
+            setLoading(false);
+            return;
+        }
 
-  // const fields = [
-  //   { label: 'Name', name: 'name', type: 'text', required: true },
-  //   { label: 'Date-Of-Birth', name: 'dob', type: 'date', required: true },
-  //   { label: 'Email', name: 'email', type: 'email', required: true },
-  //   { label: 'Date', name: 'date', type: 'date', required: true },
-  //   { label: 'Status', name: 'status', type: 'select', options: [{ label: 'Available', value: 'Available' }, { label: 'Out-of-Stock', value: 'Out of Stock' }], required: true },
-  // ];
+        console.log("Fetching user data for username:", username);
 
-  // const [formData, setFormData] = useState({
-  //   productName: '',
-  //   price: '',
-  //   quantity: '',
-  //   date: '',
-  //   status: '',
-  // });
-   
-  return (
-    <div className='component'>
+        fetch(`https://count-it-backend-2.onrender.com/api/user/${username}`)
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Failed to fetch user data.");
+                }
+                return response.json();
+            })
+            .then((data) => {
+                setUserData(data);
+            })
+            .catch((err) => {
+                setError(err.message);
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+    }, [username]);
 
-      <div className="topSection ">
+    if (loading) {
+        return <div className="user-profile-container">Loading...</div>;
+    }
 
-        <div className="top">
-          <img src={imgs.profilePic} alt="pic" />
+    if (error) {
+        return <div className="user-profile-container error">Error: {error}</div>;
+    }
 
-          <div className="userProfile">
-            <h3>Aneesh Panwar</h3>
-            <h4>Principal</h4>
-          </div>
+    if (!userData) {
+        return <div className="user-profile-container">No user data available.</div>;
+    }
+
+    return (
+        <div className="user-profile-container">
+            <div className="user-profile-card">
+                <div className="profile-header">
+                    <div className="avatar">
+                        <img
+                            src={userData.profilePic || "https://via.placeholder.com/100"} // Replace with a real profile picture or fallback
+                            alt="Profile"
+                        />
+                    </div>
+                    <h2 className="profile-name">{userData.username}</h2>
+                    <p className="profile-role">{userData.role}</p>
+                </div>
+
+                <div className="profile-details">
+                    {Object.entries(userData)
+                        .filter(([key]) => key !== 'id' && key !== 'username' && key !== 'role') // Exclude 'id', 'username', and 'role' from the details
+                        .map(([key, value]) => (
+                            <div className="profile-row" key={key}>
+                                <span className="profile-label">
+                                    {key.charAt(0).toUpperCase() + key.slice(1)}:
+                                </span>
+                                <span className="profile-value">{value}</span>
+                            </div>
+                        ))}
+                </div>
+            </div>
         </div>
-
-        <div className="userdata">
-          <form action="#">
-
-            <label htmlFor="name"> Name -
-              <input type="text" id='dob'  value='aneesh panwar' disabled required/>
-            </label>
-
-            <label htmlFor="dob"> DOB -
-              <input type="date" name='date' id='dob'  defaultValue='12-12-2004' disabled/>
-            </label>
-
-            <label htmlFor="email"> Email -
-              <input type="email" id='email'  value='aneesh@gmail.com' disabled required/>
-            </label>
-
-            <label htmlFor="phone"> Phone -
-              <input type="text" id='phone'  value='3465857693' disabled required/>
-            </label>
-
-          </form>
-        </div>
-      </div>
-      
-        <div className="middleSection">
-          <div className="notifications-heading">
-            Notifications
-          </div>
-          <div className="actions-to-perform btn edit-btn" onClick={()=>setnotifications([])}> <img src={imgs.clearIcon} alt="" /> Clear</div>
-        </div>
-        
-        <div className="notifications">
-          <ul>
-            {notifications.map((notification)=>{
-              return <li>{notification}</li>
-            })}
-          </ul>
-        </div>
-    </div>
-  )
+    );
 }

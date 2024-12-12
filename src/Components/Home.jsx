@@ -5,6 +5,9 @@ import { useUserContext } from '../Context/LoginContext';
 
 export default function Home({ showLogin }) {
     let { imgs, isLoginVisible } = useUserContext();
+
+    const logoSrc = imgs?.logo || 'default-logo.png'; // Replace with your default logo path
+
   
     return (
         <div>

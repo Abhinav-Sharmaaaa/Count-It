@@ -17,7 +17,7 @@ export const UserProvider = ({ children }) => {
     });
 
     const fetchUser = async (username) => {
-        console.log(`Fetching user profile for ${username}`);  // Log request in frontend
+        console.log(`Fetching user profile for ${username}`);  // Log when fetching starts
         setIsLoading(true); // Set loading to true when fetching
         setError(null); // Reset any previous errors
         try {
@@ -26,15 +26,15 @@ export const UserProvider = ({ children }) => {
                 throw new Error("Failed to fetch user data.");
             }
             const data = await response.json();
-            console.log('Received user data:', data);  // Log response data
+            console.log('Received user data:', data);  // Log the fetched data
             setUser(data); // Set the user data
         } catch (err) {
             setError(err.message); // Set error message if fetching fails
+            console.error("Error fetching user data:", err);  // Log the error in case of failure
         } finally {
             setIsLoading(false); // Set loading to false after fetching
         }
     };
-    
 
     return (
         <UserContext.Provider value={{ user, imgs, fetchUser, isLoading, error }}>

@@ -3,7 +3,6 @@ import './App.css';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Home from './Components/Home';
 import Protect from './Components/Protect';
-import User from './Components/User';
 import uData from './TempoaryData/usersData';
 import imgs from './TempoaryData/Images';
 import { UserContext } from './Context/LoginContext';
@@ -14,6 +13,7 @@ import LayoutNoDrawer from './Layouts/LayoutNoDrawer';
 import Allotment from './Components/CollegeAllotment';
 import Returned from './Components/Returned';
 import KeepTheSiteAwake from './Components/keepTheSiteAwake'; // Adjust path as necessary
+import User from './Components/User';
 
 function App() {
     const [isLoginVisible, setisLoginVisible] = useState(false);
@@ -64,6 +64,7 @@ function App() {
                             <Route path='/inventory' element={<Protect Component={Inventory} />} />
                             <Route path='/allotment' element={<Protect Component={Allotment} />} />
                             <Route path='/returned' element={<Protect Component={Returned} />} />
+                            <Route path="/profile/:username" element={<User />} />
                         </Routes>
                     </LayoutDrawer>
                 ) : (
