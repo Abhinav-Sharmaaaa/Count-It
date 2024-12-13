@@ -7,6 +7,9 @@ import { TableDataContext } from '../Context/TableDataContext';
 export default function Allotment() {
   const [showInsertForm, setShowInsertForm] = useState(false);
   const { imgs } = useUserContext();
+  let  role = localStorage.getItem("role");
+
+
 
   const [data, setData] = useState([]);
   const [formData, setFormData] = useState({
@@ -28,7 +31,6 @@ export default function Allotment() {
     { header: 'Quantity', accessor: 'quantity' },
     { header: 'Date', accessor: 'date' },
     { header: 'Branch', accessor: 'branch' }, // Updated header
-    { header: 'Lab', accessor: 'Lab' },
     { header: 'Status', accessor: 'status' }
   ];
 
@@ -47,7 +49,6 @@ export default function Allotment() {
       { label: 'MECH.', value: 'MECH.' },
       { label: 'MECH. Auto', value: 'MECH Auto' },
     ], required: true },
-    { label: 'Lab', name: 'Lab', type: 'text', required: true },  // Added date field
     { label: 'Status', name: 'status', type: 'select', options: [{ label: 'Available', value: 'Available' }, { label: 'Out-of-Stock', value: 'Out of Stock' }], required: true },
   ];
 
@@ -116,9 +117,9 @@ export default function Allotment() {
         <div className="component-title">
           <img src={imgs.allotmentIcon} alt="Allotment Icon" /> Allotment
         </div>
-        <div className="actions-to-perform btn" onClick={() => setShowInsertForm(!showInsertForm)}>
+        {role == 'manager' && <div className="actions-to-perform btn" onClick={() => setShowInsertForm(!showInsertForm)}>
           <img src={imgs.plusIcon} alt="Add" /> Insert
-        </div>
+        </div>}
       </div>
 
       <TableDataContext.Provider value={data}>
@@ -131,7 +132,7 @@ export default function Allotment() {
         />
         <DataTable
           columns={columns}
-          showActions={true}
+          showActions={role == 'manager'?true:false}
           onEdit={handleEdit}
           onDelete={handleDelete}
         />

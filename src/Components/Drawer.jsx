@@ -6,6 +6,7 @@ import { useUserContext } from '../Context/LoginContext'
 export default function Drawer() {
 
   const {imgs} = useUserContext();
+  let  role = localStorage.getItem("role");
 
   return (
     <div className='drawer'>
@@ -13,9 +14,17 @@ export default function Drawer() {
       <img src={imgs.homeIcon} alt='home'/>
        home</NavLink>
 
-      <NavLink to='/inventory' className={({isActive})=>`${isActive ? 'active-drawer-tab':''} drawer-tab`}>
+      {<NavLink to='/inventory' className={({isActive})=>`${isActive ? 'active-drawer-tab':''} drawer-tab`}>
        <img src={imgs.inventoryIcon} alt="inventory" />
-       Inventory</NavLink>
+       Inventory</NavLink>}
+
+      {/* { role === 'teacher' && <NavLink to='/tchInventory' className={({isActive})=>`${isActive ? 'active-drawer-tab':''} drawer-tab`}>
+       <img src={imgs.inventoryIcon} alt="inventory" />
+       Inventory</NavLink>} */}
+
+      {role !='manager' && <NavLink to='/csInventory' className={({isActive})=>`${isActive ? 'active-drawer-tab':''} drawer-tab`}>
+       <img src={imgs.inventoryIcon} alt="inventory" />
+       cs-Inventory</NavLink>}
 
       <NavLink to={'/allotment'} className={({isActive})=>`${isActive ? 'active-drawer-tab':''} drawer-tab`}> 
       <img src={imgs.allotmentIcon} alt="allotment" /> 

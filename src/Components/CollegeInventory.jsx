@@ -8,7 +8,7 @@ import axios from 'axios';
 
 export default function Inventory() {
   const [showInsertForm, setShowInsertForm] = useState(false);
-  const { imgs } = useUserContext();
+  const { imgs,role } = useUserContext();
   const [data, setData] = useState([]);
   const [editingItem, setEditingItem] = useState(null);
   const [isEditing, setisEditing] = useState(false);
@@ -117,14 +117,14 @@ export default function Inventory() {
         <div className="component-title">
           <img src={imgs.inventoryIcon} alt="Inventory" /> Inventory
         </div>
-        <div className="actions-to-perform btn" onClick={() => setShowInsertForm(!showInsertForm)}>
+        {role == 'manager' && <div className="actions-to-perform btn" onClick={() => setShowInsertForm(!showInsertForm)}>
           <img src={imgs.plusIcon} alt="Add" /> Insert
-        </div>
+        </div>}
       </div>
 
       <TableDataContext.Provider value={data}>
         <DataInsertionForm fields={fields} formData={formData} handleChange={handleChange} handleSubmit={handleSubmit} showInsertForm={showInsertForm} isEditing={isEditing} />
-        <DataTable columns={columns} showActions={true} onDelete={handleDelete} onEdit={handleEdit} />
+        <DataTable columns={columns} showActions={role=='manager'?true:false} onDelete={handleDelete} onEdit={handleEdit} />
       </TableDataContext.Provider>
     </div>
   );

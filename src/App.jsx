@@ -3,7 +3,6 @@ import './App.css';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Home from './Components/Home';
 import Protect from './Components/Protect';
-import uData from './TempoaryData/usersData';
 import imgs from './TempoaryData/Images';
 import { UserContext } from './Context/LoginContext';
 import Inventory from './Components/CollegeInventory';
@@ -14,15 +13,16 @@ import Allotment from './Components/CollegeAllotment';
 import Returned from './Components/Returned';
 import KeepTheSiteAwake from './Components/keepTheSiteAwake'; // Adjust path as necessary
 import User from './Components/User';
+import CSInventory from './Components/CSInventory';
+import TeacherCollegeInventory from './Components/TeacherCollegeInventory';
 
 function App() {
     const [isLoginVisible, setisLoginVisible] = useState(false);
     const [isLogedin, setisLogedin] = useState(false);
     const [userData, setuserData] = useState('');
-    const [role, setRole] = useState(''); // State for storing user role
-
     const location = useLocation();
-    const drawerNeedingComponents = ['/inventory', '/user-profile', '/allotment', '/returned'];
+    const role = localStorage.getItem("role");
+    const drawerNeedingComponents = ['/inventory', '/user-profile', '/allotment', '/returned','/csInventory','/tchInventory'];
     const needDrawer = drawerNeedingComponents.includes(location.pathname);
 
     // Check for stored role and token in localStorage
@@ -30,14 +30,12 @@ function App() {
         const storedRole = localStorage.getItem('role');
         const storedToken = localStorage.getItem('token');
         if (storedRole && storedToken) {
-            setRole(storedRole); // Set role from localStorage
             setisLogedin(true);  // Set user as logged in
         }
     }, []);
 
     function login(role) {
         setisLogedin(true);
-        setRole(role); // Set role from login
     }
 
     let values = {
@@ -65,6 +63,9 @@ function App() {
                             <Route path='/allotment' element={<Protect Component={Allotment} />} />
                             <Route path='/returned' element={<Protect Component={Returned} />} />
                             <Route path="/profile/:username" element={<User />} />
+                            <Route path='/csInventory' element={<Protect Component={CSInventory} />} />
+                            <Route path='/tchInventory' element={<Protect Component={TeacherCollegeInventory} />} />
+
                         </Routes>
                     </LayoutDrawer>
                 ) : (

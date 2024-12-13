@@ -3,8 +3,10 @@ import { useUserContext } from '../Context/LoginContext';
 import { useTableDataContext } from '../Context/TableDataContext';
 
 export default function DataTable({ columns, showActions, onDelete, onEdit }) {
-  const { imgs, component } = useUserContext();
+  const { imgs, component} = useUserContext();
   const data = useTableDataContext();
+  let  role = localStorage.getItem("role");
+
 
   return (
     <div className="stock-table-container">
@@ -27,13 +29,13 @@ export default function DataTable({ columns, showActions, onDelete, onEdit }) {
                 <td key={colIndex}>{row.quantity * row.price}</td> :
                 <td key={colIndex}>{row[column.accessor]}</td>
               ))}
-              {showActions && (
+              {(showActions && role =='manager') && (
                 <td className="actions">
                   <button
                     className="actions-to-perform edit-btn btn"
                     onClick={() => onEdit(row)} // Call onEdit function with row data
                   >
-                    <img src={imgs.editIcon} alt="Edit" /> Edit
+                  <img src={imgs.editIcon} alt="Edit" /> Edit
                   </button>
                   <button
                     className="actions-to-perform delete-btn btn"

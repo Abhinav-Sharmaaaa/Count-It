@@ -8,7 +8,7 @@ import axios from 'axios';
 
 export default function CSInventory() {
   const [showInsertForm, setShowInsertForm] = useState(false);
-  const { imgs } = useUserContext();
+  const { imgs,role } = useUserContext();
   const [data, setData] = useState([]);
   const [editingItem, setEditingItem] = useState(null);
   const [isEditing, setisEditing] = useState(false);
