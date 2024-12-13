@@ -37,6 +37,8 @@ export default function User() {
             });
     }, [username]);
 
+    console.log(userData);
+
     if (loading) {
         return <div className="user-profile-container">Loading...</div>;
     }

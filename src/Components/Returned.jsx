@@ -15,6 +15,16 @@ export default function Returned() {
     ]);
 
 
+    // [
+    //   { product: 'Example jfjkagh ', quantity: 2, date: '2023-10-22',branch:'cse',reason:'unkown', status: 'Available',},
+    //   { product: 'Example Product', quantity: 2, date: '2023-10-22',branch:'cse',reason:'unkown', status: 'Available', },
+    //   { product: 'Example Product', quantity: 2, date: '2023-10-22',branch:'cse',reason:'unkown', status: 'Available', },
+    //   { product: 'Example Product', quantity: 2, date: '2023-10-22',branch:'cse',reason:'unkown', status: 'Available', },
+    //   { product: 'Example Product', quantity: 2, date: '2023-10-22',branch:'cse',reason:'unkown', status: 'Available', },
+    //   ]
+    
+
+
     const columns = [
       { header: 'Product', accessor: 'product' },
       { header: 'Quantity', accessor: 'quantity' },

@@ -57,7 +57,7 @@ export default function Inventory() {
         setEditingItem(null);
       } else {
         // Add new item
-        const response = await axios.post('https://count-it-login.onrender.com/api/inventory/', formData, {
+        const response = await axios.post('https://count-it-login.onrender.com/api/inventory', formData, {
           headers: { 'X-Requested-With': 'XMLHttpRequest' }
         });
         setData([...data, response.data]);

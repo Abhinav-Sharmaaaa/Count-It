@@ -60,6 +60,12 @@ export default function Allotment() {
       .catch((error) => console.error('Error fetching data:', error));
   }, []);
 
+  function addToReturned(){
+    let returned = JSON.parse(localStorage.getItem('returned'))
+
+    
+  }
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
