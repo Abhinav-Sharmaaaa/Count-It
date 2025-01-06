@@ -30,10 +30,10 @@
 ## 🖥️ Deployment
 
 ### Frontend
-The frontend is live at: [https://count-it-frontend.render.com](#) (replace with actual URL if available).
+The frontend is live at: [https://count-it.render.com](#).
 
 ### Backend
-The backend is available on Docker Hub: [your-dockerhub-username/count-it-backend](https://hub.docker.com/r/your-dockerhub-username/count-it-backend)
+The backend is available on Docker Hub: [abhinav2654/count-it-backend-2](https://hub.docker.com/r/abhinav2654/count-it-backend-2)
 
 ---
 
@@ -48,4 +48,4 @@ The backend is available on Docker Hub: [your-dockerhub-username/count-it-backen
 ---
 
 ## 📧 Contact
-For any inquiries, reach out to us at [email@example.com](#).
+For any inquiries, reach out to us at [abhinav2654@gmail.com](#).
