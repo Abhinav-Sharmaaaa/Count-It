@@ -38,10 +38,12 @@ The backend is available on Docker Hub: [your-dockerhub-username/count-it-backen
 ---
 
 ## 👥 Contributors
-- **Team Member 1**: Role
-- **Team Member 2**: Role
-- **Team Member 3**: Role
-- **Team Member 4**: Role
+- **[Abhinav-Sharma](https://github.com/Abhinav-Sharmaaaa)**: Back-End Developer
+- **[Aneesh-Panwar](https://github.com/Aneesh-Panwar)**: Front-End Developer
+- **[Krishna-Gupta](https://github.com/krishnagupta98)**: Front-End Developer
+- **[Chris-Joshi](https://github.com/chrisjoshi)**: Designer
+- **[Priyanshu-Danu](https://github.com/PriyanshuDanu)**: Researcher
+- **[Suraj](https://github.com/Suraj-1309)**: Database Manager
 
 ---
 
