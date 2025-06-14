@@ -30,7 +30,7 @@
 ## 🖥️ Deployment
 
 ### Frontend
-The frontend is live at: [https://count-it.render.com](#).
+The frontend is live at: [https://count-it.render.com](https://count-it.onrender.com).
 
 ### Backend
 The backend is available on Docker Hub: [abhinav2654/count-it-backend-2](https://hub.docker.com/r/abhinav2654/count-it-backend-2)
